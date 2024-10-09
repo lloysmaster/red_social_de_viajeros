@@ -14,9 +14,21 @@ require_once './app/controllers/trip.controller.php';
             $controller = new TripController();
             $controller->showTrips();
             break;
+        case 'viaje':
+            if (!empty($params[1])) {
+                $controller = new TripController();
+                if (is_numeric($params[1])) {
+                    $controller->showTrip($params[1]);
+                } else {
+                    $controller->showError();
+                }
+            } else {
+                header('Location: ' . BASE_URL);
+            }
+            break;
         default: 
-            echo "404 Page Not Found";
+            $controller = new TripController();
+            $controller->showError();
             break;
     }
-    
 ?>

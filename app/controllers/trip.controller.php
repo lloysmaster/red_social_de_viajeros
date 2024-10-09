@@ -15,4 +15,13 @@ class TripController {
         $trips = $this->model->getTrips();
         return $this->view->showTrips($trips);
     }
+
+    public function showTrip($id) {
+        $trip = $this->model->getTrip($id);
+        return $this->view->showTrip($trip[0]);
+    }
+
+    public function showError() {
+        return $this->view->showError();
+    }
 }

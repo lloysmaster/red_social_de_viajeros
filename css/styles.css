@@ -3,7 +3,47 @@
     height: 50px;
 }
 
+.main-container {
+    margin-bottom: 100px;
+}
+
+.footer {
+    background-color: white;
+}
+
 .icon {
     width: 20px;
     height: 20px;
+    margin: 0 5px;
+    align-self: center;
+}
+
+.error-icon {
+    width: 300px;
+    height: 300px;
+    align-self: center;
+    justify-self: center;
+}
+
+.countries-container {
+    width: 350px;
+    white-space: wrap;
+}
+
+.date-container {
+    width: 270px;
+    white-space: wrap;
+}
+
+.passenger-container {
+    width: 350px;
+    white-space: wrap;
+}
+
+.detail-item{
+    width: 300px;
+}
+
+.full-width {
+    width: 100%;
 }
