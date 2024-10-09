@@ -1,0 +1,21 @@
+<?php require 'templates/layout/header.phtml' ?>
+
+<p class="text-center fs-1 my-4">Listado de viajes</p>
+<ul class="list-group">
+<?php foreach($trips as $trip): ?>
+    <li class="list-group-item d-flex justify-content-between">
+        <div>
+            <b><?= htmlspecialchars($trip->pais) ?></b> | <?= htmlspecialchars($trip->ciudad) ?>
+            <img src="assets/icons/arrow-right.png" class="icon" alt="arrow"/>
+            <b><?= htmlspecialchars($trip->pais_destino) ?></b> | <?= htmlspecialchars($trip->ciudad_destino) ?>
+        </div>
+        <div>
+            <?php if($trip->fecha_ini != '0000-00-00'): ?> <b>Ida: </b><?= htmlspecialchars($trip->fecha_ini) ?> <?php endif ?>
+            <?php if(($trip->fecha_ini != '0000-00-00') && ($trip->fecha_fin != '0000-00-00')): ?> | <?php endif ?>
+            <?php if($trip->fecha_fin != '0000-00-00'): ?> <b>Vuelta: </b><?= htmlspecialchars($trip->fecha_fin) ?> <?php endif ?>
+        </div>
+    </li>
+<?php endforeach ?>
+</ul>
+
+<?php require 'templates/layout/footer.phtml' ?>
