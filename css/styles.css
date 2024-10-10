@@ -25,6 +25,11 @@
     justify-self: center;
 }
 
+.action-icon {
+    width: 150px;
+    height: 150px;
+}
+
 .countries-container {
     width: 350px;
     white-space: wrap;
@@ -46,4 +51,12 @@
 
 .full-width {
     width: 100%;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    width: 100%; 
+    max-width: 400px;
 }

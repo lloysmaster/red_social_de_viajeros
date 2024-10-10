@@ -1,6 +1,12 @@
 <?php
-require_once './app/controllers/trip.controller.php';
+    require_once './app/controllers/trip.controller.php';
+    require_once './app/controllers/auth.controller.php';
+    require_once './app/middlewares/auth.middleware.php';
+    require_once './app/libs/response.php';
+
     define('BASE_URL', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']).'/');
+
+    $res = new Response();
 
     $action = 'viajes';
     if (!empty( $_GET['action'])) {
@@ -11,24 +17,52 @@ require_once './app/controllers/trip.controller.php';
 
     switch ($params[0]) {
         case 'viajes':
-            $controller = new TripController();
-            $controller->showTrips();
+            sessionAuthMiddleware($res);
+            $tripController = new TripController($res);
+            $tripController->showTrips();
             break;
         case 'viaje':
-            if (!empty($params[1])) {
-                $controller = new TripController();
+            sessionAuthMiddleware($res);
+            if(!empty($params[1])) {
+                $tripController = new TripController($res);
                 if (is_numeric($params[1])) {
-                    $controller->showTrip($params[1]);
+                    $tripController->showTrip($params[1]);
                 } else {
-                    $controller->showError();
+                    $tripController->showError();
                 }
             } else {
                 header('Location: ' . BASE_URL);
             }
             break;
+        case 'mostrarLogin':
+            sessionAuthMiddleware($res);
+            if(!$res->user) {
+                $authController = new AuthController();
+                $authController->showLogin();
+            } else {
+                header('Location: ' . BASE_URL);
+            }
+            break;
+        case 'login':
+                $authController = new AuthController();
+                $authController->login();
+            break;
+        case 'mostrarRegistro':
+            sessionAuthMiddleware($res);
+            if(!$res->user) {
+                $authController = new AuthController();
+                $authController->showRegister();
+            } else {
+                header('Location: ' . BASE_URL);
+            }
+            break;
+        case 'registro':
+                $authController = new AuthController();
+                $authController->register();
+            break;
         default: 
-            $controller = new TripController();
-            $controller->showError();
+            $tripController = new TripController($res);
+            $tripController->showError();
             break;
     }
 ?>

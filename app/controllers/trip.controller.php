@@ -6,9 +6,9 @@ class TripController {
     private $model;
     private $view;
 
-    public function __construct() {
+    public function __construct($res) {
         $this->model = new TripModel();
-        $this->view = new TripView();
+        $this->view = new TripView($res->user);
     }
 
     public function showTrips() {

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 09, 2024 at 05:17 PM
+-- Generation Time: Oct 11, 2024 at 01:12 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -20,6 +20,51 @@ SET time_zone = "+00:00";
 --
 -- Database: `red_social_de_viajeros`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `acceso_usuarios`
+--
+
+CREATE TABLE `acceso_usuarios` (
+  `id` int(11) NOT NULL,
+  `username` varchar(100) NOT NULL,
+  `password` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `acceso_usuarios`
+--
+
+INSERT INTO `acceso_usuarios` (`id`, `username`, `password`) VALUES
+(1, 'webadmin', '$2y$10$9fqd5sor8VXPj/yqdXyJWuJQqhETtzcvld.7VPX8D8QUwbTFpVeoa'),
+(2, 'manuel', '$2y$10$vqhwtO6uauEBhv68iTyLuOTMeGVJY1PwOtd8zbPvQuxa0ean8yriS'),
+(13, 'webadmin2', '$2y$10$cvTE7KKDukKPOI0HUuLUtujgkbTYwnrWKtSgAcIRuId6PqH4WhJgy');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `usuarios`
+--
+
+CREATE TABLE `usuarios` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(50) NOT NULL,
+  `apellido` varchar(50) NOT NULL,
+  `correo` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `usuarios`
+--
+
+INSERT INTO `usuarios` (`id`, `nombre`, `apellido`, `correo`) VALUES
+(1, 'facundo', 'alejo', 'alejo_facundo@yahoo.com'),
+(2, 'elcapiode', 'tremendo', 'elmaspichula@gmail.com'),
+(3, 'Sofía', 'Martínez', 'sofia_martinez@gmail.com'),
+(4, 'Juan', 'Pérez', 'juan_perez@hotmail.com'),
+(5, 'Laura', 'Gómez', 'laura_gomez@yahoo.com');
 
 -- --------------------------------------------------------
 
@@ -55,6 +100,19 @@ INSERT INTO `viajes` (`id`, `pais`, `pais_destino`, `ciudad`, `ciudad_destino`, 
 --
 
 --
+-- Indexes for table `acceso_usuarios`
+--
+ALTER TABLE `acceso_usuarios`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `username` (`username`);
+
+--
+-- Indexes for table `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `viajes`
 --
 ALTER TABLE `viajes`
@@ -66,10 +124,22 @@ ALTER TABLE `viajes`
 --
 
 --
+-- AUTO_INCREMENT for table `acceso_usuarios`
+--
+ALTER TABLE `acceso_usuarios`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `usuarios`
+--
+ALTER TABLE `usuarios`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `viajes`
 --
 ALTER TABLE `viajes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Constraints for dumped tables

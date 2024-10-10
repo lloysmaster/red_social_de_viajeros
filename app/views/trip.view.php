@@ -1,7 +1,10 @@
 <?php
 
 class TripView {
-    public function __construct() {
+    private $user = null;
+
+    public function __construct($user) {
+        $this->user = $user;
     }
 
     public function showTrips($trips) {

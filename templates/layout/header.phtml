@@ -24,6 +24,14 @@
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="">Viajes</a>
                         </li>
+                        <?php if (!$this->user): ?>
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="mostrarLogin">Ingresar</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="mostrarRegistro">Registrarse</a>
+                            </li>
+                        <?php endif ?> 
                     </ul>
                 </div>
             </div>
