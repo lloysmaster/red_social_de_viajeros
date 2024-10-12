@@ -19,19 +19,36 @@
         case 'viajes':
             sessionAuthMiddleware($res);
             $tripController = new TripController($res);
-            $tripController->showTrips();
+            $tripController->showTrips($res);
             break;
         case 'viaje':
             sessionAuthMiddleware($res);
             if(!empty($params[1])) {
                 $tripController = new TripController($res);
                 if (is_numeric($params[1])) {
-                    $tripController->showTrip($params[1]);
+                    $tripController->showTrip($params[1], $res);
                 } else {
                     $tripController->showError();
                 }
             } else {
                 header('Location: ' . BASE_URL);
+            }
+            break;
+        case 'borrarViaje':
+            sessionAuthMiddleware($res);
+            if(!empty($params[1]) && $res->user) {
+                $tripController = new TripController($res);
+                if (is_numeric($params[1])) {
+                    $tripController->deleteTrip($params[1]);
+                } else {
+                    $tripController->showError();
+                }
+            } else {
+                if (!$res->user) {
+                    header('Location: ' . BASE_URL . 'mostrarLogin');
+                } else {
+                    header('Location: ' . BASE_URL);
+                }
             }
             break;
         case 'mostrarLogin':

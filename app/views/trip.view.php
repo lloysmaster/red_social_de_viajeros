@@ -7,11 +7,11 @@ class TripView {
         $this->user = $user;
     }
 
-    public function showTrips($trips) {
+    public function showTrips($trips, $res) {
         require 'templates/trips-list.phtml';
     }
 
-    public function showTrip($trip) {
+    public function showTrip($trip, $res) {
         require 'templates/trip-detail.phtml';
     }
 

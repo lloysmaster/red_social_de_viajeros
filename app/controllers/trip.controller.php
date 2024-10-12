@@ -11,14 +11,23 @@ class TripController {
         $this->view = new TripView($res->user);
     }
 
-    public function showTrips() {
+    public function showTrips($res) {
         $trips = $this->model->getTrips();
-        return $this->view->showTrips($trips);
+        return $this->view->showTrips($trips, $res);
     }
 
-    public function showTrip($id) {
+    public function showTrip($id, $res) {
         $trip = $this->model->getTrip($id);
-        return $this->view->showTrip($trip[0]);
+        return $this->view->showTrip($trip[0], $res);
+    }
+
+    public function deleteTrip($id) {
+        try {
+            $this->model->deleteTrip($id);
+            header('Location: ' . BASE_URL);
+        } catch (PDOException $e) {
+            header('Location: ' . BASE_URL);
+        }
     }
 
     public function showError() {

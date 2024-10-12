@@ -22,7 +22,11 @@ class TripModel {
     }
 
     public function getTrip($id) {
-        $query = $this->db->prepare('SELECT * FROM viajes JOIN usuarios ON usuarios.id=viajes.user_id WHERE viajes.id=?');
+        $query = $this->db->prepare('SELECT viajes.id AS viaje_id,
+                                    viajes.*,
+                                    usuarios.* 
+                                    FROM viajes JOIN usuarios ON usuarios.id=viajes.user_id 
+                                    WHERE viajes.id=?');
         $query->execute([$id]);
 
         $trip = $query->fetchAll(PDO::FETCH_OBJ);
@@ -31,5 +35,10 @@ class TripModel {
         } else {
             return $trip;
         }
+    }
+
+    public function deleteTrip($id) {
+        $query = $this->db->prepare('DELETE FROM viajes WHERE viajes.id=?');
+        $query->execute([$id]);
     }
 }

@@ -1,7 +1,16 @@
 <?php require 'templates/layout/header.phtml' ?>
 
 <div class="main-container">
-    <p class="text-center fs-1 my-4">Detalle del viaje</p>
+    <div class="d-flex align-items-center">
+        <p class="text-center fs-1 my-4 mr-auto">Detalle del viaje</p>
+        <div class="ms-auto">
+            <?php if($res->user): ?>
+                <button class="btn btn-danger" onclick="openPopup(<?= $trip->viaje_id ?>)" type="button">
+                    <img class="d-flex justify-content-center icon" src="assets/icons/delete.png" alt="delete"/>
+                </button>
+            <?php endif ?>
+        </div>
+    </div>
 
     <div class="card text-center">
         <div class="card-header d-flex justify-content-evenly">
@@ -49,4 +58,26 @@
     </div>
 </div>
 
+<div class="popup-overlay" id="popup">
+    <div class="popup-content">
+        <h4 class="mb-3">Está seguro que desea eliminar este viaje?</h4>
+        <div class="d-flex flex-row gap-5 justify-content-evenly">
+            <button class="btn btn-primary" onclick="closePopup()" type="button">No, volver</button>
+            <button class="btn btn-danger" id="confirmDeleteBtn" type="button">Si, eliminar</button>
+        </div>
+    </div>
+</div>
+
 <?php require 'templates/layout/footer.phtml' ?>
+
+<script>
+    function openPopup(tripId) {
+        const deleteUrl = `<?php echo BASE_URL; ?>borrarViaje/${tripId}`;
+        document.getElementById('confirmDeleteBtn').setAttribute('onclick', `closePopup(); location.href='${deleteUrl}'`);
+        document.getElementById('popup').style.display = 'flex';
+    }
+
+    function closePopup() {
+        document.getElementById('popup').style.display = 'none';
+    }
+</script>
