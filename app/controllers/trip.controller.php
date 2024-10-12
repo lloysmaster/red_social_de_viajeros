@@ -54,6 +54,38 @@ class TripController {
         header('Location: ' . BASE_URL);
     }
 
+    public function showEditTrip($id) {
+        $users = $this->passengerModel->getUsers();
+        $selectedTrip = $this->tripModel->getTrip($id);
+        return $this->view->showEditTrip($users, $id, $selectedTrip[0]);
+    }
+
+    public function editTrip($id) {
+        if (empty($_POST['departure-country']) 
+            || empty($_POST['departure-city'])
+            || empty($_POST['arrival-country'])
+            || empty($_POST['arrival-city'])
+            || empty($_POST['start-date'])
+            || empty($_POST['end-date'])
+            || empty($_POST['passenger'])) {
+            return header('Location: ' . BASE_URL);
+        }
+
+        $trip = new stdClass();
+        $trip->id = $id;
+        $trip->departureCountry = $_POST['departure-country'];
+        $trip->departureCity = $_POST['departure-city'];
+        $trip->arrivalCountry = $_POST['arrival-country'];
+        $trip->arrivalCity = $_POST['arrival-city'];
+        $trip->startDate = $_POST['start-date'];
+        $trip->endDate = $_POST['end-date'];
+        $trip->passenger = $_POST['passenger'];
+    
+        $id = $this->tripModel->editTrip($trip);
+    
+        header('Location: ' . BASE_URL);
+    }
+
     public function deleteTrip($id) {
         try {
             $this->tripModel->deleteTrip($id);

@@ -1,43 +1,50 @@
 <div class="d-flex flex-column gap-3">
     <div class="d-flex flex-column gap-1">
         <label>País origen</label>
-        <input required name="departure-country" type="text" class="form-control">
+        <input required name="departure-country" type="text" class="form-control"
+            value="<?= $trip ? htmlspecialchars($trip->pais) : '' ?>" >
     </div>
 
     <div class="d-flex flex-column gap-1">
         <label>Ciudad origen</label>
-        <input required name="departure-city" type="text" class="form-control">
+        <input required name="departure-city" type="text" class="form-control"
+            value="<?= $trip ? htmlspecialchars($trip->ciudad) : '' ?>" >
     </div>
 
 
     <div class="d-flex flex-column gap-1">
         <label>País destino</label>
-        <input required name="arrival-country" type="text" class="form-control">
+        <input required name="arrival-country" type="text" class="form-control"
+            value="<?= $trip ? htmlspecialchars($trip->pais_destino) : '' ?>" >
     </div>
 
     <div class="d-flex flex-column gap-1">
         <label>Ciudad destino</label>
-        <input required name="arrival-city" type="text" class="form-control">
+        <input required name="arrival-city" type="text" class="form-control"
+            value="<?= $trip ? htmlspecialchars($trip->ciudad_destino) : '' ?>" >
     </div>
 
 
     <div class="d-flex flex-column gap-1">
         <label>Fecha inicio</label>
-        <input required name="start-date" type="date" class="form-control">
+        <input required name="start-date" type="date" class="form-control"
+            value="<?= $trip ? htmlspecialchars($trip->fecha_ini) : '' ?>" >
     </div>
 
 
     <div class="d-flex flex-column gap-1">
         <label>Fecha fin</label>
-        <input required name="end-date" type="date" class="form-control">
+        <input required name="end-date" type="date" class="form-control"
+            value="<?= $trip ? htmlspecialchars($trip->fecha_fin) : '' ?>" >
     </div>
 
     <div class="d-flex flex-column gap-1">
         <label>Pasajero</label>
-        <select required name="passenger" class="form-control">
+        <select required name="passenger" class="form-control text-capitalize">
             <option value="">Selecciona un pasajero</option>
             <?php foreach ($users as $user): ?>
-                <option value="<?= htmlspecialchars($user->id) ?>" class="text-capitalize">
+                <option value="<?= htmlspecialchars($user->id) ?>"
+                    <?= $trip && $trip->user_id == $user->id ? 'selected' : '' ?>>
                     <?= htmlspecialchars($user->nombre) ?>, <?= htmlspecialchars($user->apellido) ?>
                 </option>
             <?php endforeach; ?>

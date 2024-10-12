@@ -8,6 +8,10 @@
                 <button class="btn btn-danger" onclick="openPopup(<?= $trip->viaje_id ?>)" type="button">
                     <img class="d-flex justify-content-center icon" src="assets/icons/delete.png" alt="delete"/>
                 </button>
+                <?php $editTripUrl = BASE_URL . 'mostrarEditar/' . $trip->viaje_id; ?>
+                <button class="btn btn-secondary" onclick="location.href='<?php echo $editTripUrl; ?>'" type="button">
+                    <img class="d-flex justify-content-center icon" src="assets/icons/edit.png" alt="edit-trip"/>
+                </button>
             <?php endif ?>
         </div>
     </div>

@@ -56,9 +56,17 @@
             <div class="d-flex gap-1 align-items-center">
                 <?php $viewDetailUrl = BASE_URL . 'viaje/' . $trip->viaje_id; ?>
                 <button class="btn btn-primary" onclick="location.href='<?php echo $viewDetailUrl; ?>'" type="button">Ver detalle</button>
+                
                 <?php if($res->user): ?>
                     <button class="btn btn-danger" onclick="openPopup(<?= $trip->viaje_id ?>)" type="button">
-                        <img class="d-flex justify-content-center icon" src="assets/icons/delete.png" alt="delete"/>
+                        <img class="d-flex justify-content-center icon" src="assets/icons/delete.png" alt="delete-trip"/>
+                    </button>
+                <?php endif ?>
+                
+                <?php if($res->user): ?>
+                    <?php $editTripUrl = BASE_URL . 'mostrarEditar/' . $trip->viaje_id; ?>
+                    <button class="btn btn-secondary" onclick="location.href='<?php echo $editTripUrl; ?>'" type="button">
+                        <img class="d-flex justify-content-center icon" src="assets/icons/edit.png" alt="edit-trip"/>
                     </button>
                 <?php endif ?>
             </div>

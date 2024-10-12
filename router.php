@@ -23,81 +23,139 @@
             break;
         case 'viaje':
             sessionAuthMiddleware($res);
-            if(!empty($params[1])) {
-                $tripController = new TripController($res);
-                if (is_numeric($params[1])) {
-                    $tripController->showTrip($params[1], $res);
-                } else {
-                    $tripController->showError();
-                }
-            } else {
-                header('Location: ' . BASE_URL);
-            }
+            handleTripValidations($params[1], $res);
             break;
         case 'mostrarAgregar':
             sessionAuthMiddleware($res);
-            if($res->user) {
-                $tripController = new TripController($res);
-                $tripController->showAddTrip($res);
-            } else {
-                header('Location: ' . BASE_URL);
-            }
+            handleUserValidationsForShowingAdd($res);
             break;
         case 'agregar':
             sessionAuthMiddleware($res);
-            if($res->user) {
-                $tripController = new TripController($res);
-                $tripController->addTrip($res);
-            } else {
-                header('Location: ' . BASE_URL . 'mostrarLogin');
-            }
+            handleUserValidationsForAdd($res);
+            break;
+        case 'mostrarEditar':
+            sessionAuthMiddleware($res);
+            handleShowEditValidations($params[1], $res);
+            break;
+        case 'editar':
+            sessionAuthMiddleware($res);
+            handleEditValidations($params[1], $res);
             break;
         case 'borrarViaje':
             sessionAuthMiddleware($res);
-            if(!empty($params[1]) && $res->user) {
-                $tripController = new TripController($res);
-                if (is_numeric($params[1])) {
-                    $tripController->deleteTrip($params[1]);
-                } else {
-                    $tripController->showError();
-                }
-            } else {
-                if (!$res->user) {
-                    header('Location: ' . BASE_URL . 'mostrarLogin');
-                } else {
-                    header('Location: ' . BASE_URL);
-                }
-            }
+            handleDeleteValidations($params[1], $res);
             break;
         case 'mostrarLogin':
             sessionAuthMiddleware($res);
-            if(!$res->user) {
-                $authController = new AuthController();
-                $authController->showLogin();
-            } else {
-                header('Location: ' . BASE_URL);
-            }
+            handleLoginValidations($res);
             break;
         case 'login':
-                $authController = new AuthController();
-                $authController->login();
+            $authController = new AuthController();
+            $authController->login();
             break;
         case 'mostrarRegistro':
             sessionAuthMiddleware($res);
-            if(!$res->user) {
-                $authController = new AuthController();
-                $authController->showRegister();
-            } else {
-                header('Location: ' . BASE_URL);
-            }
+            handleSignInValidations($res);
             break;
         case 'registro':
-                $authController = new AuthController();
-                $authController->register();
+            $authController = new AuthController();
+            $authController->register();
             break;
         default: 
             $tripController = new TripController($res);
             $tripController->showError();
             break;
+    }
+
+    function handleTripValidations($tripId, $user) {
+        if(!empty($tripId)) {
+            $tripController = new TripController($user);
+            if (is_numeric($tripId)) {
+                $tripController->showTrip($tripId, $user);
+            } else {
+                $tripController->showError();
+            }
+        } else {
+            header('Location: ' . BASE_URL);
+        }
+    }
+
+    function handleUserValidationsForShowingAdd($res) {
+        if($res->user) {
+            $tripController = new TripController($res);
+            $tripController->showAddTrip($res);
+        } else {
+            header('Location: ' . BASE_URL);
+        }
+    }
+
+    function handleUserValidationsForAdd($res) {
+        if($res->user) {
+            $tripController = new TripController($res);
+            $tripController->addTrip($res);
+        } else {
+            header('Location: ' . BASE_URL . 'mostrarLogin');
+        }
+    }
+
+    function handleShowEditValidations($tripId, $res) {
+        if(!empty($tripId) && $res->user) {
+            $tripController = new TripController($res);
+            if (is_numeric($tripId)) {
+                $tripController->showEditTrip($tripId);
+            } else {
+                $tripController->showError();
+            }
+        } else {
+            header('Location: ' . BASE_URL);
+        }
+    }
+
+    function handleEditValidations($tripId, $res) {
+        if(!empty($tripId) && $res->user) {
+            $tripController = new TripController($res);
+            $tripController->editTrip($tripId);
+        } else {
+            if (!$res->user) {
+                header('Location: ' . BASE_URL . 'mostrarLogin');
+            } else {
+                header('Location: ' . BASE_URL);
+            }
+        }
+    }
+
+    function handleDeleteValidations($tripId, $res) {
+        if(!empty($tripId) && $res->user) {
+            $tripController = new TripController($res);
+            if (is_numeric($tripId)) {
+                $tripController->deleteTrip($tripId);
+            } else {
+                $tripController->showError();
+            }
+        } else {
+            if (!$res->user) {
+                header('Location: ' . BASE_URL . 'mostrarLogin');
+            } else {
+                header('Location: ' . BASE_URL);
+            }
+        }
+    }
+
+    function handleLoginValidations($res) {
+        if(!$res->user) {
+            $authController = new AuthController();
+            $authController->showLogin();
+        } else {
+            header('Location: ' . BASE_URL);
+        }
+    }
+
+    function handleSignInValidations($res) {
+        if(!$res->user) {
+            $authController = new AuthController();
+            $authController->showRegister();
+        } else {
+            header('Location: ' . BASE_URL);
+        }
     }
 ?>

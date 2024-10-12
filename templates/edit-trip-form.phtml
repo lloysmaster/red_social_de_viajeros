@@ -1,0 +1,12 @@
+<?php require 'templates/layout/header.phtml' ?>
+
+<div class="main-container d-flex flex-column align-items-center">
+    <p class="text-center fs-1 my-4">Editar viaje</p>
+
+    <form action="editar/<?php echo $id ?>" method="POST" class="my-4 form">
+        <?php require 'templates/trip-form.phtml'?>
+        <button type="submit" class="btn btn-primary mt-2">Editar</button>
+    </form>
+</div>
+
+<?php require 'templates/layout/footer.phtml' ?>
