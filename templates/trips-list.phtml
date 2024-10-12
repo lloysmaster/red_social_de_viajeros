@@ -1,7 +1,19 @@
 <?php require 'templates/layout/header.phtml' ?>
 
 <div class="main-container">
+    <div class="d-flex align-items-center">
     <p class="text-center fs-1 my-4">Listado de viajes</p>
+        <div class="ms-auto">
+            <?php if($res->user): ?>
+                <?php $addTripUrl = BASE_URL . 'mostrarAgregar/' ?>
+                <button class="btn btn-primary" onclick="location.href='<?php echo $addTripUrl; ?>'" type="button">
+                    <img class="icon" src="assets/icons/add.png" alt="add-trip"/>
+                    Agregar viaje
+                </button>
+            <?php endif ?>
+        </div>
+    </div>
+
     <ul class="list-group">
     <?php foreach($trips as $trip): ?>
         <li class="list-group-item d-flex justify-content-between gap-5 align-items-center">

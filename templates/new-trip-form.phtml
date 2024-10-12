@@ -1,0 +1,12 @@
+<?php require 'templates/layout/header.phtml' ?>
+
+<div class="main-container d-flex flex-column align-items-center">
+    <p class="text-center fs-1 my-4">Nuevo viaje</p>
+
+    <form action="agregar" method="POST" class="my-4 form">
+        <?php require 'templates/trip-form.phtml'?>
+        <button type="submit" class="btn btn-primary mt-2">Agregar</button>
+    </form>
+</div>
+
+<?php require 'templates/layout/footer.phtml' ?>

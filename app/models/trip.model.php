@@ -37,6 +37,17 @@ class TripModel {
         }
     }
 
+    public function addTrip($trip) {
+        $query = $this->db->prepare('INSERT INTO viajes 
+                            (pais, ciudad, pais_destino, ciudad_destino, fecha_ini, fecha_fin, user_id) 
+                            VALUES (?, ?, ?, ?, ?, ?, ?)');
+        $query->execute([$trip->departureCountry, $trip->departureCity, $trip->arrivalCountry, $trip->arrivalCity, $trip->startDate, $trip->endDate, $trip->passenger]);
+    
+        $id = $this->db->lastInsertId();
+    
+        return $id;
+    }
+
     public function deleteTrip($id) {
         $query = $this->db->prepare('DELETE FROM viajes WHERE viajes.id=?');
         $query->execute([$id]);

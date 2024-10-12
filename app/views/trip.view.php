@@ -15,6 +15,10 @@ class TripView {
         require 'templates/trip-detail.phtml';
     }
 
+    public function showAddTrip($users, $res) {
+        require 'templates/new-trip-form.phtml';
+    }
+
     public function showError() {
         require 'templates/error.phtml';
     }

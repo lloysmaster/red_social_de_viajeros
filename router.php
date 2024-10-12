@@ -34,6 +34,24 @@
                 header('Location: ' . BASE_URL);
             }
             break;
+        case 'mostrarAgregar':
+            sessionAuthMiddleware($res);
+            if($res->user) {
+                $tripController = new TripController($res);
+                $tripController->showAddTrip($res);
+            } else {
+                header('Location: ' . BASE_URL);
+            }
+            break;
+        case 'agregar':
+            sessionAuthMiddleware($res);
+            if($res->user) {
+                $tripController = new TripController($res);
+                $tripController->addTrip($res);
+            } else {
+                header('Location: ' . BASE_URL . 'mostrarLogin');
+            }
+            break;
         case 'borrarViaje':
             sessionAuthMiddleware($res);
             if(!empty($params[1]) && $res->user) {
