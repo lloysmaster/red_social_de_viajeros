@@ -1,3 +1,6 @@
+CREATE DATABASE IF NOT EXISTS `red_social_de_viajeros`;
+USE `red_social_de_viajeros`;
+
 -- phpMyAdmin SQL Dump
 -- version 5.2.1
 -- https://www.phpmyadmin.net/

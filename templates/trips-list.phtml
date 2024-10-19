@@ -55,7 +55,9 @@
             </div>
             <div class="d-flex gap-1 align-items-center">
                 <?php $viewDetailUrl = BASE_URL . 'viaje/' . $trip->viaje_id; ?>
-                <button class="btn btn-primary" onclick="location.href='<?php echo $viewDetailUrl; ?>'" type="button">Ver detalle</button>
+                <button class="btn btn-primary" onclick="location.href='<?php echo $viewDetailUrl; ?>'" type="button">
+                    <img class="d-flex justify-content-center icon" src="assets/icons/info.png" alt="trip-info"/>
+                </button>
                 
                 <?php if($res->user): ?>
                     <button class="btn btn-danger" onclick="openPopup(<?= $trip->viaje_id ?>)" type="button">

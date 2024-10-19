@@ -1,11 +1,6 @@
 <?php
-
-class UserModel {
-    private $db;
-
-    public function __construct() {
-       $this->db = new PDO('mysql:host=localhost;dbname=red_social_de_viajeros;charset=utf8', 'root', '');
-    }
+require_once "db.model.php";
+class UserModel extends dbModel {
  
     public function getUserByUsername($username) {    
         $query = $this->db->prepare("SELECT * FROM acceso_usuarios WHERE username = ?");

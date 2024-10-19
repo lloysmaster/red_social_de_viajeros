@@ -1,4 +1,5 @@
 <?php
+    require_once 'config.php';
     require_once './app/controllers/trip.controller.php';
     require_once './app/controllers/auth.controller.php';
     require_once './app/middlewares/auth.middleware.php';

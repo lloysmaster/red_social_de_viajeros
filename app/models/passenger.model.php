@@ -1,11 +1,6 @@
 <?php
-
-class PassengerModel {
-    private $db;
-
-    public function __construct() {
-       $this->db = new PDO('mysql:host=localhost;dbname=red_social_de_viajeros;charset=utf8', 'root', '');
-    }
+require_once "db.model.php";
+class PassengerModel extends dbModel {
  
     public function getUsers() {
         $query = $this->db->prepare('SELECT *
